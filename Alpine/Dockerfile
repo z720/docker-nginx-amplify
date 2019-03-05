@@ -2,7 +2,7 @@ FROM alpine:3.8
 
 LABEL maintainer="NGINX Docker Maintainers <docker-maint@nginx.com>"
 
-ENV NGINX_VERSION 1.14.2
+ENV NGINX_VERSION 1.15.9
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& CONFIG="\
@@ -138,7 +138,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
         && touch /var/log/nginx/error.log \
         \
         # Install packages required by agent
-        && apk add --no-cache python \ 
+        && apk add --no-cache python \
         procps \
         util-linux \
         py-pip \
@@ -169,7 +169,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
         && rm -Rf nginx-amplify-agent/ \
         && find /usr/lib/python2.7 -name \*\.pyo -exec rm {} \; \
         && find /usr/lib/python2.7 -name \*\.pyc -exec rm {} \; \
-        && apk del .amplify 
+        && apk del .amplify
 
 COPY ./entrypoint.sh /entrypoint.sh
 COPY conf/nginx.conf /etc/nginx/nginx.conf
