@@ -72,6 +72,9 @@ if [ $? != 0 ]; then
     exit 1
 fi
 
-wait ${nginx_pid}
+while true; do
+  trap "echo 'Reload configuration'; nginx -s reload;" HUP
+  wait ${nginx_pid}
+done
 
 echo "nginx master process has stopped, exiting."
